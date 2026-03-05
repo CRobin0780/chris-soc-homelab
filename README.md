@@ -35,6 +35,15 @@ tracks in federal and defense contractor environments.
 
 ## Projects
 
+## Projects
+
+### 🏛️ Fort Reign Garrison — Enterprise Simulation Environment
+A fully automated federal contractor IT environment with 
+30+ users, department file shares, role-based access 
+control, and business-hours activity simulation for 
+realistic SIEM telemetry.
+[View Fort Reign](./fort-reign/)
+
 ### Detection Engineering
 - [Brute Force Detection & Response](./detection-engineering/brute-force-detection)
 
