@@ -49,3 +49,13 @@ lab.local/
 - IA-5: Authenticator Management — Password policy pending
 - AU-2: Event Logging — Audit policy pending
 - CM-6: Configuration Settings — CIS GPO pending
+
+## Time Synchronization
+
+| VM | Time Source | Stratum | Status |
+|---|---|---|---|
+| LAB-DC01 | time.windows.com | 4 | ✅ Synced |
+| FRG-FS01 | LAB-DC01 (192.168.20.21) | 5 | ✅ Synced |
+| FRG-MGMT01 | LAB-DC01 (192.168.20.21) | 5 | ✅ Synced |
+
+NTP hierarchy: time.windows.com → LAB-DC01 → domain members
