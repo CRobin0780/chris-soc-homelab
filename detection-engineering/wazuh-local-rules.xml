@@ -1,0 +1,35 @@
+<!-- FortReign SOC Lab - Local Rules -->
+<!-- Copyright (C) 2015, Wazuh Inc. -->
+<!-- Maintained by: Chris Robinson (CRobin0780) -->
+<!-- Last updated: 2026-03-06 -->
+
+<group name="windows,authentication,fortreign,">
+
+  <!-- Rule 100001: Brute force detection - 5 failures in 120 seconds -->
+  <rule id="100001" level="12" frequency="3" timeframe="120">
+    <if_matched_sid>60122</if_matched_sid>
+    <same_field>win.eventdata.targetUserName</same_field>
+    <description>FortReign: Brute force detected against $(win.eventdata.targetUserName)</description>
+    <mitre>
+      <id>T1110</id>
+    </mitre>
+    <group>authentication_failures,pci_dss_10.2.4,pci_dss_10.2.5,</group>
+  </rule>
+
+  <!-- Rule 100002: Suppress Defender LSASS scan false positive -->
+  <rule id="100002" level="0">
+    <if_sid>92900</if_sid>
+    <field name="win.eventdata.sourceImage" type="pcre2">(?i)\\Windows Defender\\Platform\\.*\\MsMpEng\.exe</field>
+    <description>FortReign: Suppressed - Windows Defender LSASS scan FP</description>
+    <group>false_positive,windows_defender,</group>
+  </rule>
+
+  <!-- Rule 100003: Suppress cleanmgr.exe DLL extraction to Temp -->
+  <rule id="100003" level="0">
+    <if_sid>92151</if_sid>
+    <field name="win.eventdata.image" type="pcre2">(?i)C:\\Windows\\system32\\cleanmgr\.exe</field>
+    <description>FortReign: Suppressed - cleanmgr.exe DLL extraction to Temp (legitimate)</description>
+    <group>false_positive,fp_suppression,</group>
+  </rule>
+
+</group>
